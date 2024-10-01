@@ -17,7 +17,7 @@ Y = beta0 + X %*% beta + rnorm(n, sd = sigma)
 
 # Split the data into K = 2 folds
 # [ToDo] Create idfold vector of length n indicating the fold id, should have 1 or 2 in each position
-K <- 2
+K <- 5
 
 # idfolds <- sample(K, size = n, replace = TRUE) # non-equal fold sizes
 idfolds <- sample(rep(1:K, length.out = n), size = n) # no replacement
@@ -65,9 +65,10 @@ for (fold in 1:K){
 }
 
 # [ToDo] get cvm and cvse from cv_folds
-
+cvm <- colMeans(cv_folds)
+cvse <- apply(cv_folds, 2, FUN = sd)
 
 # Plot the output from above
-plot(lambda_seq, cvm, col = "red", ylim = c(40, 140))
+plot(lambda_seq, cvm, col = "red", ylim = c(20, 170))
 lines(lambda_seq, cvm + cvse)
 lines(lambda_seq, cvm - cvse)
