@@ -29,50 +29,39 @@ niter = 50 # fixed number of iterations (for simplicity)
 lambda = 0 # tuning parameter 
 beta_start = rep(0, 2) # starting point 
 
-# create the storage vectors
-fvec <- vector(length = niter+1)
-fvec[1] <- lassoobj(X, Y, beta_start, lambda)
+# Coordinate descent implementation for the case p = 2
+#############################################################
+# Helper functions source
+source("LassoFunctions.R")
 
-beta <- beta_start
+niter = 100 # fixed number of iterations (for simplicity)
 
-# for loop
-for(i in 1:niter){
+# First set of parameters
+lambda = 0.0 # tuning parameter 1
+beta_start = rep(0, 2) # starting point 1
+
+# [ToDo] Create a vector to store objective function values, and calculate the value of f(beta) at the beginning
+
+
+for (i in 1:niter){
+  # [ToDo] Update of beta1
   
-  # update beta1
-  beta[1] <- softthresh((1/n) * crossprod(X1, (Y - X2 * beta[2])), lambda)
+  # [ToDo] Update of beta2
   
-  # update beta2
-  beta[2] <- softthresh((1/n) * crossprod(X2, (Y - X1 * beta[1])), lambda)
+  # [ToDo] Calculate updated value of f(beta)
   
-  # calculate objective
-  fvec[i+1] <- lassoobj(X, Y, beta, lambda)
 }
 
-beta_ls <- beta
 
+
+# [ToDo] Feel free to see how the results change with different set of parameters below
 ###################################################################################
 
 # Second set of parameters
 lambda = 0.5 # tuning parameter 1
 beta_start = rep(2, 2) # starting point 2
 
-fvec2 <- vector(length = niter+1)
-fvec2[1] <- lassoobj(X, Y, beta_start, lambda)
 
-beta <- beta_start
-
-# for loop
-for(i in 1:niter){
-  
-  # update beta1
-  beta[1] <- softthresh((1/n) * crossprod(X1, (Y - X2 * beta[2])), lambda)
-  
-  # update beta2
-  beta[2] <- softthresh((1/n) * crossprod(X2, (Y - X1 * beta[1])), lambda)
-  
-  # calculate objective
-  fvec2[i+1] <- lassoobj(X, Y, beta, lambda)
-}
 
 # Third set of parameters
 lambda = 1 # tuning parameter 2
